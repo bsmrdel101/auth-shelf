@@ -22,11 +22,11 @@ function Nav() {
         }
 
         {/* If a user is logged in, show these links */}
+        <Link className="navLink" to="/shelf">
+          The Shelf
+        </Link>
         {user.id && (
           <>
-            <Link className="navLink" to="/shelf">
-              The Shelf
-            </Link>
             <LogOutButton className="navLink" />
           </>
         )}

@@ -4,6 +4,7 @@ import {useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
 import reduxSaga from 'redux-saga';
 import { useSelector } from 'react-redux';
+import ShelfItem from '../ShelfItem/ShelfItem';
 
 
 function ShelfPage() {
@@ -29,6 +30,9 @@ function addItem (){
   })
 }
 
+
+
+
 const shelfReducer = useSelector((store) => store.shelfReducer);
 
   return (
@@ -50,10 +54,11 @@ const shelfReducer = useSelector((store) => store.shelfReducer);
       {shelfReducer.map((item) => {
         
         return( 
-        <div key={item.id} >  
-        <img src={item.image_url} /> 
-        <p> {item.description}</p>
-       </div> )
+        <ShelfItem
+          item={item}
+          key={item.id}
+        />
+         )
 
       })
       }

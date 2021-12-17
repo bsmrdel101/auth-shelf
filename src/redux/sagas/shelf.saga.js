@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, take, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchShelf(action) {
@@ -33,10 +33,21 @@ function* createItem (action){
   }
 
 }
+function* deleteItem (action){
+  try {
+    const response = yield axios.delete(`/api/shelf/${action.payload.id}`, action.payload) 
+    yield put({ type: 'FETCH_SHELF', payload: response.data });
+
+  } catch (error) {
+    console.log('Shelf get request failed', error);
+  }
+
+}
 
 function* shelfSaga() {
   yield takeLatest('FETCH_SHELF', fetchShelf);
   yield takeLatest('CREATE_ITEM', createItem);
+  yield takeLatest('DELETE_ITEM', deleteItem);
 }
 
 export default shelfSaga;

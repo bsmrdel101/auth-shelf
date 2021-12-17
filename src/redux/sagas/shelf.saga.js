@@ -23,9 +23,19 @@ function* fetchShelf() {
     console.log('Shelf get request failed', error);
   }
 }
+function* createItem (action){
+  try {
+    const response = yield axios.post('/api/shelf', action.payload) 
+    yield put({ type: 'SET_SHELF', payload: response.data });
+  } catch (error) {
+    console.log('Shelf get request failed', error);
+  }
+
+}
 
 function* shelfSaga() {
   yield takeLatest('FETCH_SHELF', fetchShelf);
+  yield takeLatest('CREATE_ITEM', createItem);
 }
 
 export default shelfSaga;

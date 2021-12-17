@@ -46,6 +46,7 @@ const shelfReducer = useSelector((store) => store.shelfReducer);
          <button type='submit'>Submit</button>
         </form>
       <p>All of the available items can be seen here.</p>
+      
       {shelfReducer.map((item) => {
         
         return( 

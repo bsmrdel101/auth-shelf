@@ -16,15 +16,17 @@ router.get('/', (req, res) => {
 });
 
 /**
- * Add an item for the logged in user to the shelf
+ * Add an item for the logged in user to the shelf, this is the AUTH Object req.user
  */
+
 router.post('/', (req, res) => {
+  
   const sqlText =`INSERT INTO "item" ("description", "image_url", "user_id")
 	VALUES ($1, $2, $3);`
   const sqlValues = [
     req.body.description,
     req.body.image_url,
-    req.user_id
+    req.user.id
   ]
 console.log('this is sqlValues', sqlValues);
    pool.query(sqlText, sqlValues)

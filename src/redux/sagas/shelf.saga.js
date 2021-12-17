@@ -2,7 +2,7 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
-function* fetchShelf() {
+function* fetchShelf(action) {
   try {
     const config = {
       headers: { 'Content-Type': 'application/json' },
@@ -26,7 +26,8 @@ function* fetchShelf() {
 function* createItem (action){
   try {
     const response = yield axios.post('/api/shelf', action.payload) 
-    yield put({ type: 'SET_SHELF', payload: response.data });
+    yield put({ type: 'FETCH_SHELF', payload: response.data });
+
   } catch (error) {
     console.log('Shelf get request failed', error);
   }
